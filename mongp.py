@@ -3,6 +3,8 @@ from flask import jsonify
 from flask import request
 from flask_pymongo import PyMongo
 import datetime
+import os
+from dotenv import load_dotenv
 
 import numpy as np
 import pandas as pd
@@ -10,13 +12,20 @@ from sklearn.linear_model import LinearRegression
 
 app = Flask(__name__)
 
+load_dotenv()
 app.config['MONGO_DBNAME'] = 'logrs'
-app.config['MONGO_URI'] = 'mongodb+srv://usertst:usertst@cluster0-mwkmh.mongodb.net/logrs?retryWrites=true&w=majority'
+app.config['MONGO_URI'] = os.getenv('ATLAS_URI')
 
 mongo = PyMongo(app)
 
-mongo = PyMongo(app)
 df=pd.read_csv("insurance.csv")
+
+@app.after_request
+def after_request(response):
+  response.headers.set('Access-Control-Allow-Origin', '*')
+  response.headers.set('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+  return response
 
 @app.route('/predictions', methods=['GET'])
 def get_all_predictions():
