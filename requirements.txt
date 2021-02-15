@@ -2,3 +2,4 @@ Flask
 PyMongo
 datetime
 gunicorn
+flask_pymongo
