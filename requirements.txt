@@ -1,0 +1,5 @@
+Flask
+PyMongo
+dotenv
+datetime
+os
