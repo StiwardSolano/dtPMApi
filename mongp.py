@@ -4,7 +4,7 @@ from flask import request
 from flask_pymongo import PyMongo
 import datetime
 import os
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
 import numpy as np
 import pandas as pd
@@ -12,7 +12,7 @@ from sklearn.linear_model import LinearRegression
 
 app = Flask(__name__)
 
-load_dotenv()
+#load_dotenv()
 app.config['MONGO_DBNAME'] = 'logrs'
 app.config['MONGO_URI'] = os.getenv('ATLAS_URI')
 
